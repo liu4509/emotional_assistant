@@ -1,0 +1,9 @@
+[submodule "emotional_assistant_web_user"]
+	path = emotional_assistant_web_user
+	url = git@github.com:liu4509/emotional_assistant_web_user.git
+[submodule "emotional_assistant_web_admin"]
+	path = emotional_assistant_web_admin
+	url = git@github.com:liu4509/emotional_assistant_web_admin.git
+[submodule "emotion_assistant_system_service"]
+	path = emotion_assistant_system_service
+	url = git@github.com:liu4509/emotion_assistant_system_service.git
