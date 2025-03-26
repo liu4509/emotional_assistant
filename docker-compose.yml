@@ -1,0 +1,57 @@
+version: '1.2'
+services:
+  admin-app:
+    build: 
+      context: ./emotional_assistant_web_admin/
+      dockerfile: ./Dockerfile
+    depends_on:
+      - nest-app
+    ports:
+      - 80:80
+    networks:
+      - common-network
+  user-app:
+    build: 
+      context: ./emotional_assistant_web_user/
+      dockerfile: ./Dockerfile
+    depends_on:
+      - nest-app
+    ports:
+      - 80:80
+    networks:
+      - common-network
+  nest-app:
+    build:
+      context: ./emotion_assistant_system_service
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql-container
+      - redis-container
+    # ports:
+    #   - 3005:3000
+    networks:
+      - common-network
+  mysql-container:
+    image: mysql
+    volumes:
+      -  test-mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: emotion_assistant_system
+      MYSQL_ROOT_PASSWORD: guang
+    networks:
+      - common-network
+  redis-container:
+    image: redis
+    volumes:
+      - test-redis:/data
+    networks:
+      - common-network
+networks:
+  common-network:
+    driver: bridge
+volumes:
+  test-mysql:
+    external: true
+  test-redis:
+    external: true
+
